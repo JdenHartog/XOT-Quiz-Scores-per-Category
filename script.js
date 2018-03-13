@@ -1,0 +1,76 @@
+// JavaScript / jQuery
+var arLabels = [];
+var arCounters = [];
+var arScores = [];
+var feedback = 	x_currentPageXML.getAttribute("feedback"); // store here because attribute will be overwritten in showResults()
+var arQuestions = []; // build array of questions to store only first submit (sadly Xerte allows multiple submits when Show Feedback is enabled)
+
+//Note the final feedback for the Categories is displayed in the order they were first presented. This is random if Question Order is set to Random
+
+// Do some checks and alert if one fails.
+$(x_currentPageXML).children().each(function(i) { // loops through all child nodes
+	if (this.getAttribute("name").indexOf("#") == -1)
+		alert("No 'Category # Question' layout as question Label\nThis script needs a 'Category # Question' Label layout\n(Category and Question may contain spaces)");
+	if (this.getAttribute("name").split("#")[0].length < 2)
+		alert("Category length should be 2 or more characters\nCategory (and Question) may contain spaces");
+	if(this.getAttribute("type")!="Single Answer")
+		alert("Quiz-Scores-per-Category script only works if\n'Question Type' is 'Single Answer' for all questions");
+	if (arQuestions.indexOf(this.getAttribute("name")) == -1)
+		arQuestions.push(this.getAttribute("name"));
+	else
+		alert("Quiz-Scores-per-Category script only works if\nall question names (Labels) are unique");
+	if(i==$(x_currentPageXML).children().length-1)
+		arQuestions.length = 0; //clear array after last item
+});
+
+// Monkey patch startQs function to reset arrays
+quiz.startQsOLD = quiz.startQs;
+quiz.startQs = function() {
+	arLabels.length = 0;
+	arCounters.length = 0;
+	arScores.length = 0;
+	arQuestions.length = 0;
+	quiz.startQsOLD();
+}
+
+// Monkey patch showFeedBackandTrackResults function to track results
+quiz.showFeedBackandTrackResultsOLD = quiz.showFeedBackandTrackResults;
+quiz.showFeedBackandTrackResults = function() {
+	var questionName = $(x_currentPageXML).children()[quiz.questions[quiz.currentQ]].getAttribute("name");
+	if (arQuestions.indexOf(questionName) == -1){ // only handle first submit
+		arQuestions.push(questionName);
+		var questionCat = questionName.split("#")[0];
+		if (arLabels.indexOf(questionCat) == -1){
+			arLabels.push(questionCat);
+			arCounters.push(1);
+			if (quiz.currentAnswers[$("#optionHolder input:checked").parent().index()].correct == "true")
+				arScores.push(1);
+			else
+				arScores.push(0);
+		}else {
+			arCounters[arLabels.indexOf(questionCat)] += 1;
+			if (quiz.currentAnswers[$("#optionHolder input:checked").parent().index()].correct == "true")
+				arScores[arLabels.indexOf(questionCat)] += 1;
+		}
+	}
+	quiz.showFeedBackandTrackResultsOLD();
+}
+
+// Monkey patch showResults function to show results
+quiz.showResultsOLD = quiz.showResults;
+quiz.showResults = function() {
+	var judge = x_currentPageXML.getAttribute("judge");
+	// set judge to false as script below will be showing results (not showResultsOLD funtion)
+	x_currentPageXML.setAttribute("judge","false");
+	if (judge != "false") {
+		function addFeedbackFunction(item, index) {
+			feedbackAndJudge +=  "<p>" + item + " : " +  x_currentPageXML.getAttribute("score").replace("{i}", arScores[index]).replace("{n}", arCounters[index]) + "</p>";
+		};
+		feedbackAndJudge = feedback;
+		arLabels.forEach(addFeedbackFunction);
+		x_currentPageXML.setAttribute("feedback",feedbackAndJudge);
+	}
+	quiz.showResultsOLD();
+	// set judge back to original value (because quiz.currentAnswers[].correct isn't updated if judge is false)
+	x_currentPageXML.setAttribute("judge",judge);
+}
