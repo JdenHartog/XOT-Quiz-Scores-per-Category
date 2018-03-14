@@ -8,11 +8,17 @@ Category A # Question 1<BR>
 Category A # Question 2<BR>
 Category B # Question 1<BR>
 CategoryB # Question 2<BR>
+ 
+The final feedback could look like:
+
+Category A : You scored 1/2<BR>
+Category B : You scored 0/1<BR>
+CategoryB : You scored 1/1<BR>
 
 Note "Category B " and "CategoryB " will be treated as two different categories because of the missing space!
 
 # How to use
-Click the script.js file and click Raw. This will open the Raw Code in your browser to easily copy the code (Ctrl+A & Ctrl+C). Now add a Quiz item to your project and Script to it from the Optional Properties. Paste (Ctrl+V) the script we just copied into the Script field. Make sure all Questions have a Label with a 'Category # Question' layout and that all Labels are unique. You're good to go!
+Click the **script.js** file and click Raw. This will open the Raw Code in your browser to easily copy the code (Ctrl+A & Ctrl+C). Now add a Quiz item to your project and Script to it from the Optional Properties. Paste (Ctrl+V) the script we just copied into the Script field. Make sure all Questions have a Label with a 'Category # Question' layout and that all Labels are unique. You're good to go!
 
 You Can also click the green *Clone or download* button to download this project including the working **Example_offline.zip** to either test in a web browser by unpacking and opening the index.htm inside or importing it into your XOT environment. You can do this by selecting your Workspace folder and clicking the *i* Properties button and selecting the *Import* tab etc.
 
