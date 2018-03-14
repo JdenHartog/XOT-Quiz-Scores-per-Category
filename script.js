@@ -3,9 +3,10 @@ var arLabels = [];
 var arCounters = [];
 var arScores = [];
 var feedback = 	x_currentPageXML.getAttribute("feedback"); // store here because attribute will be overwritten in showResults()
-var arQuestions = []; // build array of questions to store only first submit (sadly Xerte allows multiple submits when Show Feedback is enabled)
+var arQuestions = []; //array of questions to store only first submit (sadly Xerte allows multiple submits when Show Feedback is enabled)
 
-//Note the final feedback for the Categories is displayed in the order they were first presented. This is random if Question Order is set to Random
+//Note the final feedback for the Categories is displayed in the order they were first presented. So if the Question Order is set to
+// Random the final feedback per Category will appear in that same random order.
 
 // Do some checks and alert if one fails.
 $(x_currentPageXML).children().each(function(i) { // loops through all child nodes
@@ -24,17 +25,17 @@ $(x_currentPageXML).children().each(function(i) { // loops through all child nod
 });
 
 // Monkey patch startQs function to reset arrays
-quiz.startQsOLD = quiz.startQs;
+quiz.startQsORIGINAL = quiz.startQs;
 quiz.startQs = function() {
 	arLabels.length = 0;
 	arCounters.length = 0;
 	arScores.length = 0;
 	arQuestions.length = 0;
-	quiz.startQsOLD();
+	quiz.startQsORIGINAL();
 }
 
 // Monkey patch showFeedBackandTrackResults function to track results
-quiz.showFeedBackandTrackResultsOLD = quiz.showFeedBackandTrackResults;
+quiz.showFeedBackandTrackResultsORIGINAL = quiz.showFeedBackandTrackResults;
 quiz.showFeedBackandTrackResults = function() {
 	var questionName = $(x_currentPageXML).children()[quiz.questions[quiz.currentQ]].getAttribute("name");
 	if (arQuestions.indexOf(questionName) == -1){ // only handle first submit
@@ -53,11 +54,11 @@ quiz.showFeedBackandTrackResults = function() {
 				arScores[arLabels.indexOf(questionCat)] += 1;
 		}
 	}
-	quiz.showFeedBackandTrackResultsOLD();
+	quiz.showFeedBackandTrackResultsORIGINAL();
 }
 
 // Monkey patch showResults function to show results
-quiz.showResultsOLD = quiz.showResults;
+quiz.showResultsORIGINAL = quiz.showResults;
 quiz.showResults = function() {
 	var judge = x_currentPageXML.getAttribute("judge");
 	// set judge to false as script below will be showing results (not showResultsOLD funtion)
@@ -70,7 +71,7 @@ quiz.showResults = function() {
 		arLabels.forEach(addFeedbackFunction);
 		x_currentPageXML.setAttribute("feedback",feedbackAndJudge);
 	}
-	quiz.showResultsOLD();
+	quiz.showResultsORIGINAL();
 	// set judge back to original value (because quiz.currentAnswers[].correct isn't updated if judge is false)
 	x_currentPageXML.setAttribute("judge",judge);
 }
