@@ -4,12 +4,12 @@ This JavaScript can be used to provide different scores for different categories
 # Intro
 The Quiz item in Xerte Online Toolkit (XOT) https://github.com/thexerteproject/xerteonlinetoolkits can only provide one score for the entire Quiz. It is presented as *number of correct answers / number of questions*. By copy pasting the script from **script.js** to the script property of the Quiz item, you will be able to provide different scores for different categories. The script automatically creates categories using the question Labels. The Labels should be formatted like *Category A # Question 1* etc. Take the following 4 question Labels for example:
 
-Category A # Question 1<BR>
-Category A # Question 2<BR>
-Category B # Question 1<BR>
-CategoryB # Question 2<BR>
+- Category A # Question 1<BR>
+- Category A # Question 2<BR>
+- Category B # Question 1<BR>
+- CategoryB # Question 2<BR>
  
-The final feedback could look like:
+Depending on the answers given, the final feedback could look like:
 
 Category A : You scored 1/2<BR>
 Category B : You scored 0/1<BR>
