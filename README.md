@@ -11,3 +11,16 @@ CategoryB # Question 2<BR>
 
 Note "Category B " and "CategoryB " will be treated as two different categories because of the missing space!
 
+# How to use
+Click the script.js file and click Raw. This will open the Raw Code in your browser to easily copy the code (Ctrl+A & Ctrl+C). Now add a Quiz item to your project and Script to it from the Optional Properties. Paste (Ctrl+V) the script we just copied into the Script field. Make sure all Questions have a Label with a 'Category # Question' layout and that all Labels are unique. You're good to go!
+
+You Can also click the green *Clone or download* button to download this project including the working Example_offline.zip to either test in a web browser by unpacking and opening the index.htm inside or importing it into your XOT environment. You can do this by selecting your Workspace folder and clicking the *i* Properties button and selecting the *Import* tab etc.
+
+# Use score first submit only
+The script also makes sure only the first submit is used to calculate the final score, when *Show Feedback* is enabled. The standard Xerte Quiz *without* the script will take the last submitted answer to calculate the end score. This allows the participant to read the feedback and change the answer to the correct one getting a perfect Quiz score.
+
+To use the *score first submit only* functionally without using multiple categories you can just create one category. When you have 10 questions and you use "Result #" as a prefix to all 10 question Labels, the script will work. If half the first submitted questions where correct the final feedback would look like: *Result : You scored 5 / 10*
+
+# Note
+You can still use the *You scored {i} out of {n} marks* option to change the default judge text from *You scored {i} / {n}* to *You answered {i} out of {n} answers correctly* for example.
+ 
