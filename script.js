@@ -11,15 +11,15 @@ var arQuestions = []; //array of questions to store only first submit (sadly Xer
 // Do some checks and alert if one fails.
 $(x_currentPageXML).children().each(function(i) { // loops through all child nodes
 	if (this.getAttribute("name").indexOf("#") == -1)
-		alert("No 'Category # Question' layout as question Label\nThis script needs a 'Category # Question' Label layout\n(Category and Question may contain spaces)");
+		window.alert("No 'Category # Question' layout as question Label\nThis script needs a 'Category # Question' Label layout\n(Category and Question may contain spaces)");
 	if (this.getAttribute("name").split("#")[0].length < 2)
-		alert("Category length should be 2 or more characters\nCategory (and Question) may contain spaces");
+		window.alert("Category length should be 2 or more characters\nCategory (and Question) may contain spaces");
 	if(this.getAttribute("type")!="Single Answer")
-		alert("Quiz-Scores-per-Category script only works if\n'Question Type' is 'Single Answer' for all questions");
+		window.alert("Quiz-Scores-per-Category script only works if\n'Question Type' is 'Single Answer' for all questions");
 	if (arQuestions.indexOf(this.getAttribute("name")) == -1)
 		arQuestions.push(this.getAttribute("name"));
 	else
-		alert("Quiz-Scores-per-Category script only works if\nall question names (Labels) are unique");
+		window.alert("Quiz-Scores-per-Category script only works if\nall question names (Labels) are unique");
 	if(i==$(x_currentPageXML).children().length-1)
 		arQuestions.length = 0; //clear array after last item
 });
