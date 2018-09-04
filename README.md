@@ -27,6 +27,8 @@ The script also makes sure only the first submit is used to calculate the final 
 
 To use the *score first submit only* functionally without using multiple categories you can just create one category. When you have 10 questions and you use "Result #" as a prefix to all 10 question Labels, the script will work. If half the first submitted questions where correct the final feedback would look like: *Result : You scored 5 / 10*
 
-# Note
-You can still use the *You scored {i} out of {n} marks* option to change the default judge text from *You scored {i} / {n}* to *You answered {i} out of {n} answers correctly* for example.
+# Notes
+- You can still use the *You scored {i} out of {n} marks* option to change the default judge text from *You scored {i} / {n}* to *You answered {i} out of {n} answers correctly* for example.
+- This JavaScript is tested with Xerte version 3.6
+
  
