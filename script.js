@@ -67,8 +67,20 @@ quiz.showResults = function() {
 		function addFeedbackFunction(item, index) {
 			feedbackAndJudge +=  "<p>" + item + " : " +  x_currentPageXML.getAttribute("score").replace("{i}", arScores[index]).replace("{n}", arCounters[index]) + "</p>";
 		};
-		feedbackAndJudge = feedback;
+		feedbackAndJudge = "";
+		var myScore = 0;
+		for (var i=0; i<quiz.myProgress.length; i++) {
+        		if (quiz.myProgress[i] == true) {
+            			myScore++;
+			}
+		}
+		feedbackAndJudge += "<p>Overall : " +  x_currentPageXML.getAttribute("score").replace("{i}", myScore).replace("{n}", quiz.questions.length) + "</p>";
 		arLabels.forEach(addFeedbackFunction);
+		if (x_currentPageXML.getAttribute("scorePos") == "Above") {
+			feedbackAndJudge = feedbackAndJudge + feedback;
+		} else {
+			feedbackAndJudge = feedback + feedbackAndJudge;
+		}
 		x_currentPageXML.setAttribute("feedback",feedbackAndJudge);
 	}
 	quiz.showResultsORIGINAL();
