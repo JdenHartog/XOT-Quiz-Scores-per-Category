@@ -11,6 +11,7 @@ The Quiz item in Xerte Online Toolkit (XOT) https://github.com/thexerteproject/x
  
 Depending on the answers given, the final feedback could look like:
 
+Overall : You scored 2/4<BR>
 Category A : You scored 1/2<BR>
 Category B : You scored 0/1<BR>
 CategoryB : You scored 1/1<BR>
@@ -25,10 +26,12 @@ You Can also click the green *Clone or download* button to download this project
 # Use score first submit only
 The script also makes sure only the first submit is used to calculate the final score, when *Show Feedback* is enabled. The standard Xerte Quiz *without* the script will take the last submitted answer to calculate the end score. This allows the participant to read the feedback and change the answer to the correct one getting a perfect Quiz score.
 
-To use the *score first submit only* functionally without using multiple categories you can just create one category. When you have 10 questions and you use "Result #" as a prefix to all 10 question Labels, the script will work. If half the first submitted questions where correct the final feedback would look like: *Result : You scored 5 / 10*
+To use the *score first submit only* functionally without using multiple categories you can just create one category. When you have 10 questions and you use "Result #" as a prefix to all 10 question Labels, the script will work. Also comment out the line `feedbackAndJudge += "<p>Overall : " + x_curren ...` so you won't get 2 overall score lines.<BR>
+If half the first submitted questions where correct the final feedback would look like: *Result : You scored 5 / 10*
 
 # Notes
 - You can still use the *You scored {i} out of {n} marks* option to change the default judge text from *You scored {i} / {n}* to *You answered {i} out of {n} answers correctly* for example.
-- This JavaScript is tested with Xerte version 3.6
+- You can still use the Optional Property: *Score Position* to place the score above or below the feedback.
+- This JavaScript is tested with Xerte version 3.7.4
 
  
