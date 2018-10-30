@@ -74,7 +74,7 @@ quiz.showResults = function() {
             			myScore++;
 			}
 		}
-		feedbackAndJudge += "<p> Total : " +  x_currentPageXML.getAttribute("score").replace("{i}", myScore).replace("{n}", quiz.questions.length) + "</p>";
+		feedbackAndJudge += "<p>Overall : " +  x_currentPageXML.getAttribute("score").replace("{i}", myScore).replace("{n}", quiz.questions.length) + "</p>";
 		arLabels.forEach(addFeedbackFunction);
 		if (x_currentPageXML.getAttribute("scorePos") == "Above") {
 			feedbackAndJudge = feedbackAndJudge + feedback;
