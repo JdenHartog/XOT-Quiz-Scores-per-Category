@@ -68,6 +68,13 @@ quiz.showResults = function() {
 			feedbackAndJudge +=  "<p>" + item + " : " +  x_currentPageXML.getAttribute("score").replace("{i}", arScores[index]).replace("{n}", arCounters[index]) + "</p>";
 		};
 		feedbackAndJudge = feedback;
+		var myScore = 0;
+		for (var i=0; i<quiz.myProgress.length; i++) {
+        		if (quiz.myProgress[i] == true) {
+            			myScore++;
+			}
+		}
+		feedbackAndJudge += "<p> Total : " +  x_currentPageXML.getAttribute("score").replace("{i}", myScore).replace("{n}", quiz.questions.length) + "</p>";
 		arLabels.forEach(addFeedbackFunction);
 		x_currentPageXML.setAttribute("feedback",feedbackAndJudge);
 	}
