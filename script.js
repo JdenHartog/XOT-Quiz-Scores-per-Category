@@ -1,5 +1,6 @@
 // JavaScript / jQuery
 var hideOverallScore = false;
+var overallText = "Overall: ";
 var arLabels = [];
 var arCounters = [];
 var arScores = [];
@@ -79,7 +80,7 @@ quiz.showResults = function() {
 					myScore++;
 				}
 			}
-			feedbackAndJudge += "<p>Overall: " +  x_currentPageXML.getAttribute("score").replace("{i}", \
+			feedbackAndJudge += "<p>" + overallText +  x_currentPageXML.getAttribute("score").replace("{i}", \
 				myScore).replace("{n}", quiz.questions.length) + "</p>";
 		}
 		arLabels.forEach(addFeedbackFunction);
