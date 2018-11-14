@@ -42,7 +42,7 @@ quiz.showFeedBackandTrackResults = function() {
 	var questionName = $(x_currentPageXML).children()[quiz.questions[quiz.currentQ]].getAttribute("name");
 	if (arQuestions.indexOf(questionName) == -1){ // only handle first submit
 		arQuestions.push(questionName);
-		var questionCat = questionName.split("#")[0];
+		var questionCat = questionName.split("#")[0].trim();
 		if (arLabels.indexOf(questionCat) == -1){
 			arLabels.push(questionCat);
 			arCounters.push(1);
@@ -67,7 +67,7 @@ quiz.showResults = function() {
 	x_currentPageXML.setAttribute("judge","false");
 	if (judge != "false") {
 		function addFeedbackFunction(item, index) {
-			feedbackAndJudge +=  "<p>" + item + " : " +  x_currentPageXML.getAttribute("score").replace("{i}", \
+			feedbackAndJudge +=  "<p>" + item + ": " +  x_currentPageXML.getAttribute("score").replace("{i}", \
 				arScores[index]).replace("{n}", arCounters[index]) + "</p>";
 		};
 		feedbackAndJudge = "";
@@ -77,7 +77,7 @@ quiz.showResults = function() {
             			myScore++;
 			}
 		}
-		feedbackAndJudge += "<p>Overall : " +  x_currentPageXML.getAttribute("score").replace("{i}", \
+		feedbackAndJudge += "<p>Overall: " +  x_currentPageXML.getAttribute("score").replace("{i}", \
 			myScore).replace("{n}", quiz.questions.length) + "</p>";
 		arLabels.forEach(addFeedbackFunction);
 		if (x_currentPageXML.getAttribute("scorePos") == "Above") {
