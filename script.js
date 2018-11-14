@@ -73,7 +73,7 @@ quiz.showResults = function() {
 				arScores[index]).replace("{n}", arCounters[index]) + "</p>";
 		};
 		feedbackAndJudge = "";
-		if (hideOverallScore != "false") {
+		if (!hideOverallScore) {
 			var myScore = 0;
 			for (var i=0; i<quiz.myProgress.length; i++) {
 				if (quiz.myProgress[i] == true) {
