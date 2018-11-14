@@ -1,17 +1,21 @@
 // JavaScript / jQuery
+var hideOverallScore = false;
+var overallText = "Overall: ";
 var arLabels = [];
 var arCounters = [];
 var arScores = [];
-var feedback = 	x_currentPageXML.getAttribute("feedback"); // store here because attribute will be overwritten in showResults()
-var arQuestions = []; //array of questions to store only first submit (sadly Xerte allows multiple submits when Show Feedback is enabled)
+var feedback = x_currentPageXML.getAttribute("feedback"); // store here because attribute will be overwritten in showResults()
+var arQuestions = []; //array of questions to store only first submit (sadly Xerte allows multiple submits when Show Feedback
+			//is enabled)
 
-//Note the final feedback for the Categories is displayed in the order they were first presented. So if the Question Order is set to
-// Random the final feedback per Category will appear in that same random order.
+//Note the final feedback for the Categories is displayed in the order they were first presented. So if the Question Order is
+// set to Random the final feedback per Category will appear in that same random order.
 
 // Do some checks and alert if one fails.
 $(x_currentPageXML).children().each(function(i) { // loops through all child nodes
 	if (this.getAttribute("name").indexOf("#") == -1)
-		window.alert("No 'Category # Question' layout as question Label\nThis script needs a 'Category # Question' Label layout\n(Category and Question may contain spaces)");
+		window.alert("No 'Category # Question' layout as question Label\nThis script needs a 'Category # Question' \
+			Label layout\n(Category and Question may contain spaces)");
 	if (this.getAttribute("name").split("#")[0].length < 2)
 		window.alert("Category length should be 2 or more characters\nCategory (and Question) may contain spaces");
 	if(this.getAttribute("type")!="Single Answer")
@@ -40,7 +44,7 @@ quiz.showFeedBackandTrackResults = function() {
 	var questionName = $(x_currentPageXML).children()[quiz.questions[quiz.currentQ]].getAttribute("name");
 	if (arQuestions.indexOf(questionName) == -1){ // only handle first submit
 		arQuestions.push(questionName);
-		var questionCat = questionName.split("#")[0];
+		var questionCat = questionName.split("#")[0].trim();
 		if (arLabels.indexOf(questionCat) == -1){
 			arLabels.push(questionCat);
 			arCounters.push(1);
@@ -65,16 +69,20 @@ quiz.showResults = function() {
 	x_currentPageXML.setAttribute("judge","false");
 	if (judge != "false") {
 		function addFeedbackFunction(item, index) {
-			feedbackAndJudge +=  "<p>" + item + " : " +  x_currentPageXML.getAttribute("score").replace("{i}", arScores[index]).replace("{n}", arCounters[index]) + "</p>";
+			feedbackAndJudge +=  "<p>" + item + ": " +  x_currentPageXML.getAttribute("score").replace("{i}",
+				arScores[index]).replace("{n}", arCounters[index]) + "</p>";
 		};
 		feedbackAndJudge = "";
-		var myScore = 0;
-		for (var i=0; i<quiz.myProgress.length; i++) {
-        		if (quiz.myProgress[i] == true) {
-            			myScore++;
+		if (!hideOverallScore) {
+			var myScore = 0;
+			for (var i=0; i<quiz.myProgress.length; i++) {
+				if (quiz.myProgress[i] == true) {
+					myScore++;
+				}
 			}
+			feedbackAndJudge += "<p>" + overallText +  x_currentPageXML.getAttribute("score").replace("{i}",
+				myScore).replace("{n}", quiz.questions.length) + "</p>";
 		}
-		feedbackAndJudge += "<p>Overall : " +  x_currentPageXML.getAttribute("score").replace("{i}", myScore).replace("{n}", quiz.questions.length) + "</p>";
 		arLabels.forEach(addFeedbackFunction);
 		if (x_currentPageXML.getAttribute("scorePos") == "Above") {
 			feedbackAndJudge = feedbackAndJudge + feedback;

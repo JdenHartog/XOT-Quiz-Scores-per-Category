@@ -11,10 +11,10 @@ The Quiz item in Xerte Online Toolkit (XOT) https://github.com/thexerteproject/x
  
 Depending on the answers given, the final feedback could look like:
 
-Overall : You scored 2/4<BR>
-Category A : You scored 1/2<BR>
-Category B : You scored 0/1<BR>
-CategoryB : You scored 1/1<BR>
+Overall: You scored 2/4<BR>
+Category A: You scored 1/2<BR>
+Category B: You scored 0/1<BR>
+CategoryB: You scored 1/1<BR>
 
 Note "Category B " and "CategoryB " will be treated as two different categories because of the missing space!
 
