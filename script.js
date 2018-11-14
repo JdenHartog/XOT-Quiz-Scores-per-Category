@@ -5,10 +5,10 @@ var arLabels = [];
 var arCounters = [];
 var arScores = [];
 var feedback = x_currentPageXML.getAttribute("feedback"); // store here because attribute will be overwritten in showResults()
-var arQuestions = []; //array of questions to store only first submit (sadly Xerte allows multiple submits when Show Feedback \
+var arQuestions = []; //array of questions to store only first submit (sadly Xerte allows multiple submits when Show Feedback
 			//is enabled)
 
-//Note the final feedback for the Categories is displayed in the order they were first presented. So if the Question Order is \
+//Note the final feedback for the Categories is displayed in the order they were first presented. So if the Question Order is
 // set to Random the final feedback per Category will appear in that same random order.
 
 // Do some checks and alert if one fails.
@@ -69,7 +69,7 @@ quiz.showResults = function() {
 	x_currentPageXML.setAttribute("judge","false");
 	if (judge != "false") {
 		function addFeedbackFunction(item, index) {
-			feedbackAndJudge +=  "<p>" + item + ": " +  x_currentPageXML.getAttribute("score").replace("{i}", \
+			feedbackAndJudge +=  "<p>" + item + ": " +  x_currentPageXML.getAttribute("score").replace("{i}",
 				arScores[index]).replace("{n}", arCounters[index]) + "</p>";
 		};
 		feedbackAndJudge = "";
@@ -80,7 +80,7 @@ quiz.showResults = function() {
 					myScore++;
 				}
 			}
-			feedbackAndJudge += "<p>" + overallText +  x_currentPageXML.getAttribute("score").replace("{i}", \
+			feedbackAndJudge += "<p>" + overallText +  x_currentPageXML.getAttribute("score").replace("{i}",
 				myScore).replace("{n}", quiz.questions.length) + "</p>";
 		}
 		arLabels.forEach(addFeedbackFunction);
