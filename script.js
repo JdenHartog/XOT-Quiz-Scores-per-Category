@@ -1,4 +1,5 @@
 // JavaScript / jQuery
+var hideOverallScore = false;
 var arLabels = [];
 var arCounters = [];
 var arScores = [];
@@ -71,14 +72,16 @@ quiz.showResults = function() {
 				arScores[index]).replace("{n}", arCounters[index]) + "</p>";
 		};
 		feedbackAndJudge = "";
-		var myScore = 0;
-		for (var i=0; i<quiz.myProgress.length; i++) {
-        		if (quiz.myProgress[i] == true) {
-            			myScore++;
+		if (hideOverallScore != "false") {
+			var myScore = 0;
+			for (var i=0; i<quiz.myProgress.length; i++) {
+				if (quiz.myProgress[i] == true) {
+					myScore++;
+				}
 			}
+			feedbackAndJudge += "<p>Overall: " +  x_currentPageXML.getAttribute("score").replace("{i}", \
+				myScore).replace("{n}", quiz.questions.length) + "</p>";
 		}
-		feedbackAndJudge += "<p>Overall: " +  x_currentPageXML.getAttribute("score").replace("{i}", \
-			myScore).replace("{n}", quiz.questions.length) + "</p>";
 		arLabels.forEach(addFeedbackFunction);
 		if (x_currentPageXML.getAttribute("scorePos") == "Above") {
 			feedbackAndJudge = feedbackAndJudge + feedback;
