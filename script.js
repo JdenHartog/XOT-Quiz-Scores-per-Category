@@ -65,7 +65,7 @@ quiz.showFeedBackandTrackResults = function() {
 quiz.showResultsORIGINAL = quiz.showResults;
 quiz.showResults = function() {
 	var judge = x_currentPageXML.getAttribute("judge");
-	// set judge to false as script below will be showing results (not showResultsOLD funtion)
+	// set judge to false as script below will be showing results (not showResultsORIGINAL funtion)
 	x_currentPageXML.setAttribute("judge","false");
 	if (judge != "false") {
 		function addFeedbackFunction(item, index) {
