@@ -94,4 +94,7 @@ quiz.showResults = function() {
 	quiz.showResultsORIGINAL();
 	// set judge back to original value (because quiz.currentAnswers[].correct isn't updated if judge is false)
 	x_currentPageXML.setAttribute("judge",judge);
+	// set feedback back to original value
+	x_currentPageXML.setAttribute("feedback",feedback);
 }
+
