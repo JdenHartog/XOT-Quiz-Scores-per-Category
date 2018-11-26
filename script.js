@@ -101,3 +101,12 @@ quiz.showResults = function() {
 	x_currentPageXML.setAttribute("feedback",feedback);
 }
 
+// Monkey patch leavePage function to restore original functions
+quiz.leavePageORIGINAL = quiz.leavePage;
+quiz.leavePage = function() {
+	quiz.startQs = quiz.startQsORIGINAL;
+	quiz.showFeedBackandTrackResults = quiz.showFeedBackandTrackResultsORIGINAL;
+	quiz.showResults = quiz.showResultsORIGINAL;
+	quiz.leavePageORIGINAL();
+	quiz.leavePage = quiz.leavePageORIGINAL;
+}
