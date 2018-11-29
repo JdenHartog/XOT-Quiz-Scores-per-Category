@@ -33,6 +33,7 @@ If half the first submitted questions where correct the final feedback would loo
 - You can still use the *You scored {i} out of {n} marks* option to change the default judge text from *You scored {i} / {n}* to *You answered {i} out of {n} answers correctly* for example.
 - You can still use the Optional Property: *Score Position* to place the score above or below the feedback.
 - You can use the variable `overallText` on [line 3](https://github.com/JdenHartog/XOT-Quiz-Scores-per-Category/blob/master/script.js#L3) to change that text to your own language.
+- You can use branch [table](https://github.com/JdenHartog/XOT-Quiz-Scores-per-Category/tree/table) if you want results in a table (all "You scored ./." horizontally aligned)
 - This JavaScript is tested with Xerte version 3.7.4
 
  
